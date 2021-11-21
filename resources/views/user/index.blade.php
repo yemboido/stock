@@ -3,7 +3,7 @@
 @section('content')
         <!--here place content -->
         <div class="main">
-            @if(session()->has('message'))
+             @if(session()->has('message'))
              <div class="row" id="alert_box">
                 <div class="col s12">
                     <div class="card green darken-1">
@@ -28,41 +28,43 @@
             <div class="row">
 
                 <div class="col s12 m12 l12">
-                   
+                  
                     <div class="card-panel">
                         
-                        <a class= "waves-effect waves-dark orange btn-large right" href="{{route('commandes.create')}}"><i class="material-icons white-text right">add</i>CREER</a>
+                        <a class= "waves-effect waves-dark orange btn-large right" href="{{route('users.create')}}"><i class="material-icons white-text right">add</i>CREER</a>
                         <table class="striped">
                             <thead>
                               <tr>
-                                  <th>Date Commande</th>
-                                  <th>Fournisseur</th>
-                                  <th>Date probable Arrivée</th>
-                                 
+                             
+                                  <th>Nom</th>
+                                  <th>Prenom</th>
+                                  <th>Contact</th>
+                                  <th>Produit vendu</th>
+                                  <th>Montant</th>
+                                  <th>Etats<th>
                                   <th>Actions</th>
                               </tr>
                             </thead>
 
                             <tbody>
-                              @foreach($commandes as $commande)
+                              @foreach($users as $user)
                                 <tr>
-                                    <td>{{$commande->dateCommande}}</td>
-                                    <td>{{$commande->fournisseur_id}}</td>
-                                    <td>{{$commande->dateProbabeLivraison}}</td>
-                                    
-                                    
-                                   <form action="{{route('commande.destroy',$commande->id)}}" method="post">
+                                    <td>{{$user->nom}}</td>
+                                    <td>{{$user->prenom}}</td>
+                                    <td> {{$user->telephone}}</td>
+                                    <td> {{$user->structure}}</td> 
+                                    <td>----------------<td>
+                                    <td>{{$user->status}}</td>
+                                  
                                     <td>
-                                        <!-- <a href="{{route('commande.show',$commande->id)}}" class="btn-small waves-effect waves-light back tooltipped z-depth-0" data-position="top" data-tooltip="View details"><i class="material-icons white-text">remove_red_eye</i></a>&nbsp -->
+                                        <a href="{{route('users.show',$user->id)}}" class="btn-small waves-effect waves-light back tooltipped z-depth-0" data-position="top" data-tooltip="View details"><i class="material-icons white-text">remove_red_eye</i></a>&nbsp
 
-                                        <a class="waves-effect waves-dark green btn-small z-depth-0"  href="{{route('commandes.edit',$commande->id)}}"><i class="material-icons">edit</i></a>&nbsp
-                                        @csrf
-                                      @method('DELETE')
-                                       <button type="submit" class="waves-effect waves-dark red btn-small z-depth-0 btn-submit"><i class="material-icons">delete</i></button>
+                                        <a class="waves-effect waves-dark green btn-small z-depth-0"  href="{{route('users.edit',$user->id)}}"><i class="material-icons">edit</i></a>&nbsp
+                                        <a href="{{route('desactiver',$user->id)}}">etat</a>
                                     </td>
                                   </form>
                                 </tr>
-                                @endforeach
+                               @endforeach
                                
                             </tbody>
                         </table>
@@ -74,7 +76,7 @@
                             <ul class="pagination">
 
                               <li class="disabled"><a href=""><i class="material-icons">chevron_left</i></a></li>
-                              {!! $commandes->links() !!} 
+                              {!! $users->links() !!} 
                               <li class="waves-effect"><a href="#"><i class="material-icons">chevron_right</i></a></li>
 
                             </ul>

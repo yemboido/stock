@@ -14,14 +14,26 @@
 
                             <div class="input-field">
                                 <label for="nom">Nom</label>
-                                <input type="text" id="nom" name="name"  placeholder="nom ">
-                                 @error('name') <div class="error text-danger" >{{ $message }}</div> @enderror
+                                <input type="text" id="nom" name="nom"  placeholder="nom ">
+                                 @error('nom') <div class="error text-danger" >{{ $message }}</div> @enderror
+                            </div>
+
+                            <div class="input-field">
+                                <label for="nom">Prenom</label>
+                                <input type="text" name="prenom"  placeholder="nom ">
+                                 @error('prenom') <div class="error text-danger" >{{ $message }}</div> @enderror
                             </div>
                             
                             <div class="input-field">
                                   <label for="nom">Email</label>
-                                <input type="text" id="nom" name="email"  placeholder="email">
+                                <input type="text"  name="email"  placeholder="email">
                                  @error('email') <div class="error text-danger" >{{ $message }}</div> @enderror   
+                            </div>
+
+                            <div class="input-field">
+                                  <label for="nom">Telephone</label>
+                                <input type="text"  name="telephone"  placeholder="telephone">
+                                 @error('telephone') <div class="error text-danger" >{{ $message }}</div> @enderror   
                             </div>
 
                             <div class="input-field">
@@ -43,9 +55,12 @@
                             <label >Role</label>
 
                                 <select class="form-control" name="role">
-                                    <option value="admin">Administrateur</option>
-                                    <option value="author">Auteur</option>
-                                    <option value="subscriber">Utilisateur simple</option>
+                                
+                                    <option value="admin">Vendeur </option>
+                                    <option value="superadmin">Revendeur</option>
+                                    <option value="comptable">Administrateur</option>
+                                    <option value="revendeur">Revendeur</option>
+                                    <option value="caissier">Caissier</option>
                                 </select>
                                
                                 @error('role') <div class="error text-danger" >{{ $message }}</div> @enderror 

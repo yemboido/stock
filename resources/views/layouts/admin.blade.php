@@ -64,7 +64,7 @@
         <ul class="sidenav sidenav-fixed" id="sidenav">
          
             <li>
-                <a href="{{route('admin')}}"><i class="material-icons blue-text">dashboard</i>Dashboard</a>           
+                <a href="{{route('dashboard')}}"><i class="material-icons blue-text">dashboard</i>Dashboard</a>           
             </li>
 
            
@@ -81,7 +81,7 @@
             </li>
 
             <li>
-                <a href="{{route('commandes.index')}}"><i class="material-icons blue-text">local_offer</i>Commande</a>           
+                <a href="{{url('commandes')}}"><i class="material-icons blue-text">local_offer</i>Commande</a>           
             </li>
 
 

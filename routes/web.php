@@ -1,14 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CommandeController;
+use App\Http\Livewire\Commandes;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\AccueilController;
 use App\Http\Controllers\ProduitController;
-use App\Http\Controllers\AdminController;
+
 use App\Http\Controllers\FournisseurController;
 use App\Http\Controllers\UserController;
-
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EntreeController;
 /*
 |--------------------------------------------------------------------------
@@ -20,28 +20,22 @@ use App\Http\Controllers\EntreeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes();
+Route::get('/',function (){return view('auth.login');});
 
-//Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth'])->group(function () {
 
  Route::resource('categories',CategorieController::class);
  Route::resource('produits',ProduitController::class);
  Route::resource('fournisseurs',FournisseurController::class);
- Route::resource('commandes',CommandeController::class);
+ Route::get('commandes',Commandes::class);
  Route::resource('entrees',EntreeController::class);
  
- Route::get('/admin',[AdminController::class,'index'])->name('admin');
  
  Route::resource('users',UserController::class);
- Route::post('desactiver',[UserController::class,'desactiver'])->name('desactiver');
+ Route::get('desactiver/{id}',[UserController::class,'desactiver'])->name('desactiver');
  Route::get('profile/{id}',[UserController::class,'profile'])->name('profile');
+ Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard');
+});
 
-
- 
-
-//});
-
-Route::get('/',[AccueilController::class,'index'])->name('index');
-Route::get('lirePlus/{id}',[AccueilController::class,'lireArticle'])->name('lirePlus');
-
-Auth::routes();
 
