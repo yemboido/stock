@@ -21,6 +21,8 @@ class CreateProduitsTable extends Migration
             $table->double('prixVente');
             $table->double('prixRevendeur');
             $table->string('description');
+            $table->double('quantite')->default(0);
+            $table->integer('alerte');
             $table->timestamps();
 
             $table->foreignId('categorie_id')->references('id')->on('categories');

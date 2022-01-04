@@ -6,7 +6,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use App\Models\Article;
+use App\Models\Sortie;
+use App\Models\Entrer;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
@@ -47,5 +48,9 @@ class User extends Authenticatable
 
     public function article(){
         return $this->hasMany(Article::class,'user_id');
+    }
+
+    public function sortie(){
+        return $this->hasMany(Sorti::class,'id');
     }
 }

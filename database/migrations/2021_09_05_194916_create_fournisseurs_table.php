@@ -1,10 +1,11 @@
+
 <?php
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCommandeProduitsTable extends Migration
+class CreateFournisseursTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +14,13 @@ class CreateCommandeProduitsTable extends Migration
      */
     public function up()
     {
-        Schema::create('commande_produits', function (Blueprint $table) {
+        Schema::create('fournisseurs', function (Blueprint $table) {
             $table->id();
-            $table->double('quantite');
-          
+            $table->String('nom');
+            $table->String('prenom');
+            $table->String('contact');
+            $table->String('structure');
             $table->timestamps();
-            $table->foreignId('produit_id')->references('id')->on('produits');
-            $table->foreignId('commande_id')->references('id')->on('commandes');
         });
     }
 
@@ -30,6 +31,6 @@ class CreateCommandeProduitsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('commande_produits');
+        Schema::dropIfExists('fournisseurs');
     }
 }

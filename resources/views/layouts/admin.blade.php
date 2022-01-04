@@ -86,7 +86,7 @@
 
 
             <li>
-                <a href="{{route('entrees.index')}}"><i class="material-icons blue-text">local_offer</i>Entree</a>           
+                <a href="{{url('entrees')}}"><i class="material-icons blue-text">local_offer</i>Entree</a>           
             </li>
              <li>
                 <a href="{{route('users.index')}}"><i class="material-icons blue-text">group</i>Membres</a>           

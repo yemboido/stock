@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Entree extends Model
+class Boutique extends Model
 {
     use HasFactory;
-    protected $fillable=['dateEntree','quantite','stock_id','user_id'];
+    protected $fillable=['libelle','actif','montantCaisse','personneReference','telephone','adresse'];
 }

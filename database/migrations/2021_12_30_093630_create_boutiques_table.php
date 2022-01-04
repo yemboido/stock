@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSortieRevendeursTable extends Migration
+class CreateBoutiquesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,15 @@ class CreateSortieRevendeursTable extends Migration
      */
     public function up()
     {
-        Schema::create('sortie_revendeurs', function (Blueprint $table) {
+        Schema::create('boutiques', function (Blueprint $table) {
             $table->id();
+            $table->String('libelle');
+            $table->boolean('actif')->default(true);
+            $table->String('personneReference');
+            $table->String('telephone');
+            $table->String('adresse');
+            $table->double('montantCaisse')->default(0);
             $table->timestamps();
-            $table->date('dateSortie');
-            $table->double('quantite');
-            
-
-            $table->foreignId('stock_id')->references('id')->on('stocks');
-            $table->foreignId('revendeur_id')->references('id')->on('revendeurs');
         });
     }
 
@@ -32,6 +32,6 @@ class CreateSortieRevendeursTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sortie_revendeurs');
+        Schema::dropIfExists('boutiques');
     }
 }

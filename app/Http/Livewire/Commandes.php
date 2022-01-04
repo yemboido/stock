@@ -12,18 +12,24 @@ class Commandes extends Component
     public $dateCommande,$dateProbableLivraison,$fournisseur_id,$commandes,$fournisseurs,$commande_id;
     public $updateMode=false ,$createMode= false,$produit_id=[],$quantite=[],$produits;
     public $inputs = [];
-    public $i = 1;
+    public $i = 0;
 
     public function add($i)
-    {
+    {   
+    
         $i = $i + 1;
         $this->i = $i;
         array_push($this->inputs ,$i);
+        
+       
+
+       // dd($this->inputs);
     }
  
     public function remove($i)
     {
         unset($this->inputs[$i]);
+       
     }
 
     public function render()
@@ -47,13 +53,15 @@ class Commandes extends Component
         $this->dateCommande= '';
         $this->dateProbableLivraison = '';
         $this->fournisseur_id = '';
+        $this->produit_id=[];
+        $this->quantite=[];
     }
     
     public function store()
     {
       //
        
-        $commande=Commande::updateOrCreate(
+        $commande=Commande::Create(
              [
             'dateCommande' => $this->dateCommande,
             'dateProbableLivraison' => $this->dateProbableLivraison,
@@ -61,8 +69,8 @@ class Commandes extends Component
         ]);
 
 
-        foreach ($this->quantite as $key => $value) {
-            CommandeProduit::updateOrCreate(
+        foreach ($this->inputs as $key => $value) {
+            CommandeProduit::Create(
                 [
                     'commande_id'=>$commande->id,
                     'quantite'=>$this->quantite[$key],
@@ -76,11 +84,11 @@ class Commandes extends Component
        
         $this->resetCreateForm();
         $this->createMode=false;
-        $this->updateMode=false;
+       
     }
 
     public function edit($id)
-    {   $this->updateMode=$this->createMode=true;
+    {   $this->updateMode=true;
         $Commande = Commande::findOrFail($id);
         $this->commande_id=$Commande->id;
         $this->dateCommande= $Commande->dateCommande;
@@ -94,14 +102,42 @@ class Commandes extends Component
         {
             array_push($this->quantite,$info->quantite);
             array_push($this->produit_id,$info->produit_id);
-            array_push($this->inputs,$key-1);
+            array_push($this->inputs,$key);
         }
-        
+       
     }
+
+
+    public function update($id){
+        $commande=CommandeProduit::where('commande_id',$id)->get();
+
+        foreach ($commande as $key => $value) {
+           $value->update([
+                'quantite'=>$this->quantite[$key],
+                'produit_id'=>$this->produit_id[$key],
+                'commande_id'=>$id,
+            ]);
+        }
+
+        session()->flash('message', 'Commande modifier.');
+        $this->resetCreateForm();
+        $this->updateMode=false;
+    }
+
     
     public function delete($id)
     {
-        Commande::find($id)->delete();
+        $commande=Commande::find($id);
+
+        $infoCommande=CommandeProduit::where('commande_id','=',$commande->id)->get();
+
+       
+        foreach($infoCommande as $info)
+        {
+            $info->delete();
+        }
+
+        $commande->delete();
         session()->flash('message', 'Commande supprimer.');
     }
 }
